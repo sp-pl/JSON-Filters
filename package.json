@@ -1,0 +1,11 @@
+{
+  "name": "efigence",
+  "version": "1.0.0",
+  "description": "filtrownica",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Artur Juźwik",
+  "license": "ISC"
+}
