@@ -84,7 +84,6 @@ let createCategoriesTabs = (data,propName) => {
 
 
 let searchObjInit = (categories) => {
-    let categoriesfirstTab = document.querySelector('.filter .search button:nth-child(1)');
     let searchObj = {
         year: '',
         all: '' 
@@ -107,17 +106,25 @@ let controls = (searchObj) => {
     selectOptionsContainer.addEventListener('change',selectOptionsSet);
 
     function categoryTabsBool(evt){
-        if(evt.target.tagName === 'BUTTON' && !evt.target.classList.contains('active')){
+        let categoriesAllTabs = document.querySelectorAll('.filter .search .categories button');
+        console.log(evt.target.dataset.category)
+         console.log(categoriesAllTabs)
+        if(evt.target.dataset.category === 'Wszystkie' && !evt.target.classList.contains('active')){
             evt.target.classList.add('active');
-            searchObj[evt.target.dataset.category] = true;
-        }else if(evt.target.tagName === 'BUTTON' && evt.target.classList.contains('active')){
-            evt.target.classList.remove('active');
-            searchObj[evt.target.dataset.category] = false;
-        };
-
-        if(evt.target.dataset.category === 'Wszystkie' ){
-            searchObj[evt.target.dataset.category] = true;
         }
+
+
+        // if(evt.target.tagName === 'BUTTON' && !evt.target.classList.contains('active')){
+        //     evt.target.classList.add('active');
+        //     searchObj[evt.target.dataset.category] = true;
+        // }else if(evt.target.tagName === 'BUTTON' && evt.target.classList.contains('active')){
+        //     evt.target.classList.remove('active');
+        //     searchObj[evt.target.dataset.category] = false;
+        // };
+
+        // if(evt.target.dataset.category === 'Wszystkie' ){
+        //     searchObj[evt.target.dataset.category] = true;
+        // }
     };
     categoriesTabsContainer.addEventListener('click',categoryTabsBool);
 
