@@ -413,13 +413,22 @@ let formatData = (data) => {
 };
 
 let createCategoriesTabs = (data,prop) => {
-    //get single category
+    //get every category
     let categories = [];
     for(let i = 0; i < data.length; i++){
         categories.push(data[i][prop])
     }
+    //get single categories from every category
     let singleCategories = categories.filter((v,index,self) => self.indexOf(v) === index );
-    console.log(singleCategories);
+
+    //create and append tabs
+    let categoriesTabsContainer = document.querySelector('.filter .search .categories');
+    for(let i = 0; i < singleCategories.length; i++){
+        let newButton = document.createElement('BUTTON');
+        newButton.textContent = singleCategories[i];
+        newButton.dataset.category = singleCategories[i];
+        categoriesTabsContainer.appendChild(newButton);
+    }
 }
 createCategoriesTabs(formatData(arr),'category');
 
