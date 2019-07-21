@@ -412,11 +412,11 @@ let formatData = (data) => {
     return data;
 };
 
-let createCategoriesTabs = (data,prop) => {
+let createCategoriesTabs = (data,propName) => {
     //get every category
     let categories = [];
     for(let i = 0; i < data.length; i++){
-        categories.push(data[i][prop])
+        categories.push(data[i][propName])
     }
     //get single categories from every category
     let singleCategories = categories.filter((v,index,self) => self.indexOf(v) === index );
@@ -432,5 +432,26 @@ let createCategoriesTabs = (data,prop) => {
 }
 createCategoriesTabs(formatData(arr),'category');
 
+let createYearOptions = (data,propName) => {
+    //get every year
+    let allYears = [];
+    for(let i = 0; i < data.length; i++){
+        allYears.push(data[i][propName].getFullYear());
+    };
+    
+    //get single years
+    let singleYears = allYears.filter((v,index,self) => self.indexOf(v) === index);
+
+    //create and append options
+    let selectOptionsContainer = document.querySelector('.filter .search .select-year-container .years');
+    for(let i = 0; i < singleYears.length; i++){
+        let newOption = document.createElement('OPTION');
+        newOption.textContent = singleYears[i];
+        newOption.dataset.year = singleYears[i];
+        selectOptionsContainer.appendChild(newOption);
+    }
+};
+
+createYearOptions(arr, 'date')
 
 
