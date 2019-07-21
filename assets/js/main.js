@@ -100,16 +100,26 @@ let searchObjInit = (categories) => {
 };
 
 let controls = (searchObj) => {
-
-    categoriesTabsContainer
-
-    function categoryTabsTruth(evt){
-        console.log(evt)
-        if(evt.target == 'BUTTON'){
-            alert('tak')
-        }
+    function selectOptionsSet(evt){
+        searchObj.year = evt.target.value;
+        console.log(searchObj)
     }
-    categoriesTabsContainer.addEventListener('click',categoryTabsTruth);
+    selectOptionsContainer.addEventListener('change',selectOptionsSet);
+
+    function categoryTabsBool(evt){
+        if(evt.target.tagName === 'BUTTON' && !evt.target.classList.contains('active')){
+            evt.target.classList.add('active');
+            searchObj[evt.target.dataset.category] = true;
+        }else if(evt.target.tagName === 'BUTTON' && evt.target.classList.contains('active')){
+            evt.target.classList.remove('active');
+            searchObj[evt.target.dataset.category] = false;
+        };
+
+        if(evt.target.dataset.category === 'Wszystkie' ){
+            searchObj[evt.target.dataset.category] = true;
+        }
+    };
+    categoriesTabsContainer.addEventListener('click',categoryTabsBool);
 
 
 }
