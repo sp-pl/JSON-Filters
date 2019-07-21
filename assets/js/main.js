@@ -107,10 +107,14 @@ let controls = (searchObj) => {
 
     function categoryTabsBool(evt){
         let categoriesAllTabs = document.querySelectorAll('.filter .search .categories button');
-        console.log(evt.target.dataset.category)
-         console.log(categoriesAllTabs)
+
         if(evt.target.dataset.category === 'Wszystkie' && !evt.target.classList.contains('active')){
             evt.target.classList.add('active');
+            for(let i = 1; i < categoriesAllTabs.length; i++){
+                categoriesAllTabs[i].classList.remove('active');
+                searchObj[categoriesAllTabs[i].dataset.category] = false;
+            }
+            console.log(searchObj)
         }
 
 
