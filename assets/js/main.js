@@ -28,7 +28,7 @@ let initApp = (data,propName) => {
     createYearOptions(data,(propName || 'date'));
     let uniqueCategories = createCategoriesTabs(data,(propName || 'category'));
     let searchObjectFirst = searchObjInit(uniqueCategories);
-    controls(searchObjectFirst)
+    controls(searchObjectFirst);
 };
 
 let formatData = (data) => {
@@ -99,6 +99,8 @@ let searchObjInit = (categories) => {
 };
 
 let controls = (searchObj) => {
+
+
     function selectOptionsSet(evt){
         searchObj.year = evt.target.value;
     }
@@ -113,7 +115,7 @@ let controls = (searchObj) => {
             for(let i = 1; i < categoriesAllTabs.length; i++){
                 categoriesAllTabs[i].classList.remove('active');
                 searchObj[categoriesAllTabs[i].dataset.category] = false;
-            }
+            };
         }
         if((evt.target.dataset.category !== 'all' && !evt.target.classList.contains('active')) && evt.target.tagName === 'BUTTON'){
             categoriesAllTabs[0].classList.remove('active');
@@ -123,9 +125,18 @@ let controls = (searchObj) => {
         }else if((evt.target.dataset.category !== 'all' && evt.target.classList.contains('active')) && evt.target.tagName === 'BUTTON'){
             evt.target.classList.remove('active');
             searchObj[evt.target.dataset.category] = false;
-        }
+        };
     };
     categoriesTabsContainer.addEventListener('click',categoryTabsBool);
+    
+    function performSearch(){
+        console.log(searchObj);
+    }
+    document.querySelector('button.search').addEventListener('click',performSearch);
+
+
 
 };
+
+
 
