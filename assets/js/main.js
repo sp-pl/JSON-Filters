@@ -1,5 +1,7 @@
 
 //datalink: http://localhost:3000/assets/data/data.json
+let selectOptionsContainer = document.querySelector('.filter .search .select-year-container .years');
+let categoriesTabsContainer = document.querySelector('.filter .search .categories');
 
 let fetchData = (link) => {
     fetch(link, {
@@ -14,7 +16,7 @@ let fetchData = (link) => {
         }else{
             throw new Error('server not')
         }
-        })
+    })
     .then(json => {
         initApp(json)
     })
@@ -49,14 +51,13 @@ let createCategoriesTabs = (data,propName) => {
     let singleCategories = categories.filter((v,index,self) => self.indexOf(v) === index );
 
     //create and append tabs
-    let categoriesTabsContainer = document.querySelector('.filter .search .categories');
     for(let i = 0; i < singleCategories.length; i++){
         let newButton = document.createElement('BUTTON');
         newButton.textContent = singleCategories[i];
         newButton.dataset.category = singleCategories[i];
         categoriesTabsContainer.appendChild(newButton);
-    }
-}
+    };
+};
 // createCategoriesTabs(formatData(arr),'category');
 
 let createYearOptions = (data,propName) => {
@@ -70,7 +71,6 @@ let createYearOptions = (data,propName) => {
     let singleYears = allYears.filter((v,index,self) => self.indexOf(v) === index);
 
     //create and append options
-    let selectOptionsContainer = document.querySelector('.filter .search .select-year-container .years');
     for(let i = 0; i < singleYears.length; i++){
         let newOption = document.createElement('OPTION');
         newOption.textContent = singleYears[i];
@@ -79,3 +79,17 @@ let createYearOptions = (data,propName) => {
     }
 };
 
+let configSearchObj = () =>{
+    let categoriesfirstTab = document.querySelector('.filter .search button:nth-child(1)');
+
+    let obj = {
+        year: '',
+        all: '' 
+    }
+    obj.year = selectOptionsContainer.value;
+    obj.all = categoriesfirstTab.classList.contains('active') ? obj.all = true : obj.all = false;
+    
+
+
+}
+configSearchObj();
