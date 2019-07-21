@@ -27,7 +27,8 @@ let initApp = (data,propName) => {
     formatData(data);
     createYearOptions(data,(propName || 'date'));
     let uniqueCategories = createCategoriesTabs(data,(propName || 'category'));
-    searchObjInit(uniqueCategories);
+    let searchObjectFirst = searchObjInit(uniqueCategories);
+    controls(searchObjectFirst)
 };
 
 let formatData = (data) => {
@@ -87,7 +88,7 @@ let searchObjInit = (categories) => {
     let searchObj = {
         year: '',
         all: '' 
-    }
+    };
     searchObj.year = selectOptionsContainer.value;
     searchObj.all = true;
     if(categories){
@@ -95,11 +96,21 @@ let searchObjInit = (categories) => {
             searchObj[categories[i]] = false;
         };
     };
-    console.log(searchObj)
     return searchObj;
 };
 
-let controls = () => {
+let controls = (searchObj) => {
+
+    categoriesTabsContainer
+
+    function categoryTabsTruth(evt){
+        console.log(evt)
+        if(evt.target == 'BUTTON'){
+            alert('tak')
+        }
+    }
+    categoriesTabsContainer.addEventListener('click',categoryTabsTruth);
+
 
 }
 
