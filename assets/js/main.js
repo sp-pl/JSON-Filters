@@ -404,10 +404,24 @@ let formatData = (data) => {
     //sort data from lowest to highest
     data.sort((a,b) => {
         return a.date - b.date
-    })
+    });
     //turn posix to date
     for(let i = 0; i < data.length; i++){
          data[i].date = new Date(data[i].date)
+    };
+    return data;
+};
+
+let createCategoriesTabs = (data,prop) => {
+    //get single category
+    let categories = [];
+    for(let i = 0; i < data.length; i++){
+        categories.push(data[i][prop])
     }
+    let singleCategories = categories.filter((v,index,self) => self.indexOf(v) === index );
+    console.log(singleCategories);
 }
+createCategoriesTabs(formatData(arr),'category');
+
+
 
