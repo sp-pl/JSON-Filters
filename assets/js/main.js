@@ -101,37 +101,31 @@ let searchObjInit = (categories) => {
 let controls = (searchObj) => {
     function selectOptionsSet(evt){
         searchObj.year = evt.target.value;
-        console.log(searchObj)
     }
     selectOptionsContainer.addEventListener('change',selectOptionsSet);
 
     function categoryTabsBool(evt){
         let categoriesAllTabs = document.querySelectorAll('.filter .search .categories button');
 
-        if(evt.target.dataset.category === 'Wszystkie' && !evt.target.classList.contains('active')){
+        if(evt.target.dataset.category === 'all' && !evt.target.classList.contains('active')){
             evt.target.classList.add('active');
+            searchObj.all = true;
             for(let i = 1; i < categoriesAllTabs.length; i++){
                 categoriesAllTabs[i].classList.remove('active');
                 searchObj[categoriesAllTabs[i].dataset.category] = false;
             }
-            console.log(searchObj)
         }
-
-
-        // if(evt.target.tagName === 'BUTTON' && !evt.target.classList.contains('active')){
-        //     evt.target.classList.add('active');
-        //     searchObj[evt.target.dataset.category] = true;
-        // }else if(evt.target.tagName === 'BUTTON' && evt.target.classList.contains('active')){
-        //     evt.target.classList.remove('active');
-        //     searchObj[evt.target.dataset.category] = false;
-        // };
-
-        // if(evt.target.dataset.category === 'Wszystkie' ){
-        //     searchObj[evt.target.dataset.category] = true;
-        // }
+        if((evt.target.dataset.category !== 'all' && !evt.target.classList.contains('active')) && evt.target.tagName === 'BUTTON'){
+            categoriesAllTabs[0].classList.remove('active');
+            searchObj.all = false;
+            evt.target.classList.add('active');
+            searchObj[evt.target.dataset.category] = true;
+        }else if((evt.target.dataset.category !== 'all' && evt.target.classList.contains('active')) && evt.target.tagName === 'BUTTON'){
+            evt.target.classList.remove('active');
+            searchObj[evt.target.dataset.category] = false;
+        }
     };
     categoriesTabsContainer.addEventListener('click',categoryTabsBool);
 
-
-}
+};
 
