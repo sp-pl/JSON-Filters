@@ -23,12 +23,12 @@ let fetchData = (link) => {
 };
 fetchData('http://localhost:3000/assets/data/data.json');
 
-let initApp = (data,propName) => {
+let initApp = (data) => {
     formatData(data);
-    createYearOptions(data,(propName || 'date'));
-    let uniqueCategories = createCategoriesTabs(data,(propName || 'category'));
+    createYearOptions(data,'date');
+    let uniqueCategories = createCategoriesTabs(data,'category');
     let searchObjectFirst = searchObjInit(uniqueCategories);
-    controls(searchObjectFirst);
+    controls(searchObjectFirst, data);
 };
 
 let formatData = (data) => {
@@ -98,8 +98,7 @@ let searchObjInit = (categories) => {
     return searchObj;
 };
 
-let controls = (searchObj) => {
-
+let controls = (searchObj,data) => {
 
     function selectOptionsSet(evt){
         searchObj.year = evt.target.value;
@@ -129,10 +128,16 @@ let controls = (searchObj) => {
     };
     categoriesTabsContainer.addEventListener('click',categoryTabsBool);
     
-    function performSearch(){
-        console.log(searchObj);
+
+    function performSearch(searchObj,data){
+        console.log(searchObj,data);
+        for(let i = 0; i<data.length; i++){
+            if(data[i].date.getFullYear() == searchObj.year){
+                console.log(data[i])
+            }
+        }
     }
-    document.querySelector('button.search').addEventListener('click',performSearch);
+    document.querySelector('button.search').addEventListener('click',performSearch(searchObj,data));
 
 
 
