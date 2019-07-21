@@ -1,16 +1,15 @@
-import createLayout from './createLayout.js';
 'use strict'
-
-
+import createLayout from './createLayout.js';
 
 let selectOptionsContainer = document.querySelector('.filter .search .select-year-container .years');
 let categoriesTabsContainer = document.querySelector('.filter .search .categories');
+let mainOutput = document.querySelector('.output'); 
 
 let fetchData = (link) => {
     fetch(link, {
         method:'GET',
         headers: {
-        Accept: 'application/json'
+            Accept: 'application/json'
         }
     })
     .then(response => {
@@ -98,6 +97,7 @@ let controls = (searchObj,data) => {
     selectOptionsContainer.addEventListener('change',selectOptionsSet);
 
     function categoryTabsBool(evt){
+        evt.preventDefault();
         let categoriesAllTabs = document.querySelectorAll('.filter .search .categories button');
         if(evt.target.dataset.category === 'all' && !evt.target.classList.contains('active')){
             evt.target.classList.add('active');
@@ -120,10 +120,11 @@ let controls = (searchObj,data) => {
     categoriesTabsContainer.addEventListener('click',categoryTabsBool);
     
     function performSearch(searchObj,data){
+        mainOutput.innerHTML = "";
         for(let i = 0; i<data.length; i++){
             if(data[i].date.getFullYear() == searchObj.year){
                 if(searchObj.all === true){
-                    console.log(data[i]);
+                    createLayout(data[i]);
                 }else{
                     for(let props in searchObj){
                         if((searchObj[props] == true) && data[i].category == props){
@@ -136,7 +137,6 @@ let controls = (searchObj,data) => {
     };
     performSearch(searchObj,data);
     document.querySelector('button.search').addEventListener('click',() => {performSearch(searchObj,data)});
-
 };
 
 

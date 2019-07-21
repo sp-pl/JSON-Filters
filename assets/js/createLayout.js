@@ -1,7 +1,5 @@
 function createLayout(data){
-
     let mainOutput = document.querySelector('.output');
-
     let singleReport = document.createElement('DIV');
         singleReport.classList.add('report');
 
