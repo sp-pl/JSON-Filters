@@ -142,6 +142,9 @@ let controls = (searchObj,data) => {
 
         let metaBox = document.createElement('DIV');
             metaBox.classList.add('meta');
+
+            singleReport.appendChild(metaBox);
+
         let innerMetaP1 = document.createElement('P');
             innerMetaP1.classList.add('time');
 
@@ -160,7 +163,14 @@ let controls = (searchObj,data) => {
             
             metaBox.appendChild(innerMetaP2);
 
-        singleReport.appendChild(metaBox);
+        let reportDetails = document.createElement('DIV');
+            reportDetails.classList.add('holder');
+
+        let reportDetailsTitle = document.createElement('H2');
+            reportDetailsTitle.innerHTML = data.title
+                
+
+        
         mainOutput.appendChild(singleReport);
     };
 };
