@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 (function(){
 
     let resp = 0;
@@ -43,6 +43,12 @@
         }
     })
 
+    function uniqueYrs(allRecordYears){
+        let uniqueYears = null;
+
+        return uniqueYears = allRecordYears.filter((v,i) => allRecordYears.indexOf(v) === i);
+    }
+
     function initData(resp){
 
         // format date
@@ -55,7 +61,8 @@
 
         };
 
-        let uniqueYears = (allRecordYears) = allRecordYears.filter((v,i) => allRecordYears.indexOf(v) === i);
+        uniqueYrs(allRecordYears);    
+        // let uniqueYears = (allRecordYears) = allRecordYears.filter((v,i) => allRecordYears.indexOf(v) === i);
 
         //add select options
         for(let i = 0; i < uniqueYears.length; i++){
@@ -324,3 +331,4 @@
 
 }())
 
+*/
