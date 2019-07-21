@@ -131,22 +131,35 @@ let controls = (searchObj,data) => {
 
     function performSearch(searchObj,data){
 
-console.log('kliknięto')
-
         for(let i = 0; i<data.length; i++){
-            if(searchObj.all === true && (data[i].date.getFullYear() == searchObj.year)){
-                console.log(data[i])
-            }else{
-                for(let y = 1; y<searchObj.length; y++ ){
-                    console.log(searchObj[y])
+
+            if(data[i].date.getFullYear() == searchObj.year){
+                if(searchObj.all === true){
+                    console.log(data[i]);
+                }else{
+                    
+                    for(let y = 1; y<searchObj.length; y++){
+
+                    }
                 }
-            }
+            };
+
+            // if(searchObj.all === true && ){
+            //     console.log('wszystkie')
+            // }
+
+
+
+            // else{
+            //     console.log('specyficzne')
+            //     for(let y = 1; y<searchObj.length; y++ ){
+            //         console.log(searchObj)
+            //     }
+            // }
 
         }
     }
-    document.querySelector('button.search').addEventListener('click',performSearch(searchObj,data));
-
-
+    document.querySelector('button.search').addEventListener('click',() => {performSearch(searchObj,data)});
 
 };
 
