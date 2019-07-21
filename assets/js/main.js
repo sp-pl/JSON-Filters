@@ -1,4 +1,4 @@
-
+'use strict'
 //datalink: http://localhost:3000/assets/data/data.json
 let selectOptionsContainer = document.querySelector('.filter .search .select-year-container .years');
 let categoriesTabsContainer = document.querySelector('.filter .search .categories');
@@ -25,8 +25,9 @@ fetchData('http://localhost:3000/assets/data/data.json');
 
 let initApp = (data,propName) => {
     formatData(data);
-    createCategoriesTabs(data,(propName || 'category'));
     createYearOptions(data,(propName || 'date'));
+    let uniqueCategories = createCategoriesTabs(data,(propName || 'category'));
+    searchObjInit(uniqueCategories);
 };
 
 let formatData = (data) => {
@@ -40,25 +41,6 @@ let formatData = (data) => {
     };
     return data;
 };
-
-let createCategoriesTabs = (data,propName) => {
-    //get every category
-    let categories = [];
-    for(let i = 0; i < data.length; i++){
-        categories.push(data[i][propName])
-    }
-    //get single categories from every category
-    let singleCategories = categories.filter((v,index,self) => self.indexOf(v) === index );
-
-    //create and append tabs
-    for(let i = 0; i < singleCategories.length; i++){
-        let newButton = document.createElement('BUTTON');
-        newButton.textContent = singleCategories[i];
-        newButton.dataset.category = singleCategories[i];
-        categoriesTabsContainer.appendChild(newButton);
-    };
-};
-// createCategoriesTabs(formatData(arr),'category');
 
 let createYearOptions = (data,propName) => {
     //get every year
@@ -79,17 +61,45 @@ let createYearOptions = (data,propName) => {
     }
 };
 
-let configSearchObj = () =>{
-    let categoriesfirstTab = document.querySelector('.filter .search button:nth-child(1)');
+let createCategoriesTabs = (data,propName) => {
+    //get every category
+    let categories = [];
+    for(let i = 0; i < data.length; i++){
+        categories.push(data[i][propName])
+    }
+    //get single categories from every category
+    let singleCategories = categories.filter((v,index,self) => self.indexOf(v) === index );
 
-    let obj = {
+    //create and append tabs
+    for(let i = 0; i < singleCategories.length; i++){
+        let newButton = document.createElement('BUTTON');
+        newButton.textContent = singleCategories[i];
+        newButton.dataset.category = singleCategories[i];
+        categoriesTabsContainer.appendChild(newButton);
+    };
+    return singleCategories;
+};
+// createCategoriesTabs(formatData(arr),'category');
+
+
+let searchObjInit = (categories) => {
+    let categoriesfirstTab = document.querySelector('.filter .search button:nth-child(1)');
+    let searchObj = {
         year: '',
         all: '' 
     }
-    obj.year = selectOptionsContainer.value;
-    obj.all = categoriesfirstTab.classList.contains('active') ? obj.all = true : obj.all = false;
-    
+    searchObj.year = selectOptionsContainer.value;
+    searchObj.all = true;
+    if(categories){
+        for(let i = 0; i<categories.length; i++){
+            searchObj[categories[i]] = false;
+        };
+    };
+    console.log(searchObj)
+    return searchObj;
+};
 
+let controls = () => {
 
 }
-configSearchObj();
+
