@@ -130,11 +130,18 @@ let controls = (searchObj,data) => {
     
 
     function performSearch(searchObj,data){
-        console.log(searchObj,data);
+
+console.log('kliknięto')
+
         for(let i = 0; i<data.length; i++){
-            if(data[i].date.getFullYear() == searchObj.year){
+            if(searchObj.all === true && (data[i].date.getFullYear() == searchObj.year)){
                 console.log(data[i])
+            }else{
+                for(let y = 1; y<searchObj.length; y++ ){
+                    console.log(searchObj[y])
+                }
             }
+
         }
     }
     document.querySelector('button.search').addEventListener('click',performSearch(searchObj,data));
