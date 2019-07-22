@@ -9,7 +9,7 @@
 
 at this moment what is working: 
 
--select is creating from the years assigned to data prop in each records
+-select are created from the years assigned to data prop in each records
 
 -tabs are created from the categories from category prop
 
