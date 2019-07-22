@@ -1,4 +1,5 @@
 function createLayout(data){
+    console.log(data)
     let mainOutput = document.querySelector('.output');
 
     let singleReport = document.createElement('DIV');
