@@ -20,8 +20,6 @@ to do:
 
 
 OLD VERSION:
-
-
 this code is fetching JSON with special structure of data and create: 
 1) select with years from JSON records,
 2) create tabs with categories from JSON field "category"
