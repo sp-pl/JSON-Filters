@@ -120,7 +120,10 @@ import createLayout from './createLayout.js';
         };
         categoriesTabsContainer.addEventListener('click',categoryTabsBool);
         
-        function performSearch(searchObj,data){
+        function performSearch(searchObj,data,evt){
+            if(evt){
+                evt.preventDefault();
+            }
             mainOutput.innerHTML = "";
             for(let i = 0; i<data.length; i++){
                 if(data[i].date.getFullYear() == searchObj.year){
@@ -137,7 +140,7 @@ import createLayout from './createLayout.js';
             };
         };
         performSearch(searchObj,data);
-        document.querySelector('button.search').addEventListener('click',() => {performSearch(searchObj,data)});
+        document.querySelector('button.search').addEventListener('click',(evt) => {performSearch(searchObj,data,evt)});
     };
 }());
 
