@@ -55,7 +55,6 @@ import createLayout from './createLayout.js';
         for(let i = 0; i < singleYears.length; i++){
             let newOption = document.createElement('OPTION');
             newOption.textContent = singleYears[i];
-            newOption.dataset.year = singleYears[i];
             selectOptionsContainer.appendChild(newOption);
         }
     };
