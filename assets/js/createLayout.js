@@ -53,6 +53,19 @@ function createLayout(data){
         reportContent.appendChild(reportDetails);
         singleReport.appendChild(reportContent);
 
+    let reportAction = document.createElement('DIV');
+        reportAction.classList.add('action');
+
+    if(data.files.length === 0){
+        console.log(0)
+    }else if(data.files.length === 1){
+        console.log(1)
+    }else{
+        for(let i = 0; i<data.files.length; i++){
+            console.log(i)
+        }
+    }    
+
 
     mainOutput.appendChild(singleReport);
 };
