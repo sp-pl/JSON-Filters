@@ -43,6 +43,34 @@ body *:not(i){line-height:1;font-family: 'Lato', sans-serif;}
 			margin-bottom:55px;
 			display:flex;
 
+			input{
+				width:100%;
+				padding-left:30px;
+				box-sizing:border-box;
+				height:80px;
+				border:none;
+				border-bottom:2px solid black;
+				color:#9b9b9b;
+				font-size:19px;
+				box-shadow:0 0 40px rgba(0,0,0,.1);
+			}
+			button {
+				background-color:#65c1d4;
+				color:white;
+			    position: absolute;
+			    right: 45px;
+			    top:50%;
+			    transform:translateY(-50%);
+			    display: inline;
+			    height: auto;
+			    font-size: 15px;
+			    padding: 15px 43px;
+			    box-sizing: border-box;
+			    border: none;
+			    border-radius: 30px;
+			    cursor:pointer;
+			}
+
 			.select-year-container{
 				min-width:170px;
 				margin-right:35px;
@@ -62,8 +90,18 @@ body *:not(i){line-height:1;font-family: 'Lato', sans-serif;}
 				    background-color: white;
 				    width: 45px;
 				}
+				select{
+					min-width:170px;
+					padding-left:25px;
+					font-size:19px;
+					box-shadow:0 0 40px rgba(0,0,0,.1);
+					box-sizing:border-box;
+					height:80px;
+					border:none;
+					border-bottom:2px solid black;
+				}
 			}
-			
+
 			.input-container{
 				position:relative;
 				width:100%;
@@ -103,44 +141,6 @@ body *:not(i){line-height:1;font-family: 'Lato', sans-serif;}
 	}//end of search
 }//end of filter
    
-section.filter .search-input-container input, 
-section.filter .search-input-container button,
-section.filter .search-input-container select{
-	box-sizing:border-box;
-	height:80px;
-	border:none;
-	border-bottom:2px solid black;
-}
-section.filter .search-input-container input{
-	width:100%;
-	padding-left:30px;
-	color:#9b9b9b;
-	font-size:19px;
-	box-shadow:0 0 40px rgba(0,0,0,.1);
-}
-section.filter .search-input-container button {
-	background-color:#65c1d4;
-	color:white;
-    position: absolute;
-    right: 45px;
-    top:50%;
-    transform:translateY(-50%);
-    display: inline;
-    height: auto;
-    font-size: 15px;
-    padding: 15px 43px;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 30px;
-    cursor:pointer;
-}
-
-section.filter .search-input-container select{
-	min-width:170px;
-	padding-left:25px;
-	font-size:19px;
-	box-shadow:0 0 40px rgba(0,0,0,.1);
-}
 
 
 .report{
