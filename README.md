@@ -14,7 +14,6 @@ at this moment what is working:
 -tabs are created from the categories from category prop
 
 -to perform search select year from select and press any tab button you like
-
 -press 'Wyszukaj' to search
 
 
@@ -23,6 +22,9 @@ to do:
 -display layout relayed on files items per record
 
 -show reports contained text in text input
+
+
+
 
 
 
