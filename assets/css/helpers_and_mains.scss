@@ -1,0 +1,19 @@
+:root{
+  --silver-border:1px solid #e5e5e5;
+}
+body{
+	background-color:rgb(242, 242, 242);
+}
+body *:not(i){
+	line-height:1;
+	font-family: 'Lato', sans-serif;
+}
+.container{
+	width:100%;
+	max-width:1300px;
+	margin:0 auto;
+}
+.output{
+	background-color:white;
+	padding:0 65px 0 90px;
+}

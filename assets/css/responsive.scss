@@ -1,0 +1,63 @@
+@media (max-width:991px){
+	section.filter .search-input-container{
+		flex-direction:column;
+	}
+	section.filter .search-input-container .select-year-container{
+		width:300px;
+		margin: 0 auto 30px auto;
+	}
+	section.filter .search-input-container select{
+		
+		width: 300px;
+	}
+	section.filter .search-input-container button{
+		right:15px;
+	}
+}
+@media (max-width:768px){
+	section.filter form.search{
+		padding:50px 20px;
+	}
+	section.filter .output{
+		padding:0 20px;
+	}
+	section.filter .report{
+		flex-direction:column;
+		padding-left:0;
+	}
+	section.filter .report .meta{
+		margin: 0;
+	    display: flex;
+	    justify-content: space-between;
+	}
+}
+@media (max-width:480px){
+	section.filter .action{
+		flex-direction:column;
+	}
+	section.filter .main-header a{
+		margin-left:10px;
+	}
+	section.filter .search-input-container .select-year-container,
+	section.filter .search-input-container select{
+		width:100%;
+	}
+	section.filter .search-input-container .input-container{
+		margin-bottom:50px;
+	}
+	section.filter .search-input-container button{
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		top: 125px;
+	}
+	section.filter form.search .categories{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+	section.filter form.search .categories button{
+		margin-right:0;
+	}
+    
+}
