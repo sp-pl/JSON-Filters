@@ -1,4 +1,4 @@
-import createLayout from './createLayout.js';
+import appendReport from './appendReport.js';
 
 (function(){
 'use strict'
@@ -128,11 +128,11 @@ import createLayout from './createLayout.js';
             for(let i = 0; i<data.length; i++){
                 if(data[i].date.getFullYear() == searchObj.year){
                     if(searchObj.all === true){
-                        createLayout(data[i]);
+                        appendReport(data[i]);
                     }else{
                         for(let props in searchObj){
                             if((searchObj[props] == true) && data[i].category == props){
-                                createLayout(data[i])
+                                appendReport(data[i])
                             };
                         }; 
                     };
