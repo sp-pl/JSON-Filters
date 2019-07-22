@@ -1,5 +1,6 @@
 function createLayout(data){
     let mainOutput = document.querySelector('.output');
+
     let singleReport = document.createElement('DIV');
         singleReport.classList.add('report');
 
@@ -26,18 +27,33 @@ function createLayout(data){
         
         metaBox.appendChild(innerMetaP2);
 
+//<div class="holder">
+//    <h2 class="title">' + re[i].title + '</h2>
+//    <p class="description">' + re[i].description + '</p>
+//</div>
+//<div class="action">
+//    <a class="open" href="#">Zobacz raport</a>
+
+    let reportContent = document.createElement('DIV');
+        reportContent.classList.add('content');        
+
     let reportDetails = document.createElement('DIV');
         reportDetails.classList.add('holder');
 
     let reportDetailsTitle = document.createElement('H2');
+        reportDetailsTitle.classList.add('title');
         reportDetailsTitle.innerHTML = data.title;
 
         reportDetails.appendChild(reportDetailsTitle);
 
-    let reportDescription = document.createElement('P');    
-        reportDescription.innerHTML = data.description;    
+    let reportDescription = document.createElement('P');
+        reportDescription.classList.add('description');    
+        reportDescription.innerHTML = data.description;
 
-    
+        reportContent.appendChild(reportDetails);
+        singleReport.appendChild(reportContent);
+
+
     mainOutput.appendChild(singleReport);
 };
 export default createLayout;
