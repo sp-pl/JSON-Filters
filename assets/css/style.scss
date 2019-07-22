@@ -46,8 +46,13 @@ body *:not(i){
 		background-color: white;
 		margin-bottom: 30px;
 
-		.categories{
+		.search-input-container{
+			margin-bottom:55px;
+			display:flex;
+		}
 
+		.categories{
+			
 			button{
 				cursor:pointer;
 			    border: 1px solid #e5e5e5;
@@ -59,13 +64,13 @@ body *:not(i){
 			    text-align: left;
 			    min-width: 150px;
 			    margin-bottom:15px;
-
+			    
 			    &.active{
 			    	background-color:#f7fcfd;
 					color:black;
 					font-weight: 500;
 					position:relative;
-
+					
 					&:after{
 						content: '\e805';
 						font-family: fontello;
@@ -75,17 +80,12 @@ body *:not(i){
 					}
 			    }
 			}
-		}
+		}//end of categories
 	}//end of search
 }
 /* controls and header */
 
 
-
-section.filter .search-input-container{
-	margin-bottom:55px;
-	display:flex;
-}
 section.filter .search-input-container .input-container{
 	position:relative;
 	width:100%;
@@ -148,36 +148,41 @@ section.filter .search-input-container .select-year-container:after{
 
 }
 /*end of: controls and header */
-/* report */
 .report{
 	display:flex;
 	padding:30px 0 30px 20px;
 	border-bottom:1px solid #e5e5e5;
-}
-.report h2{
-	font-weight:500;
-	font-size:20px;
-	margin: 0 0 15px 0;
-}
-.report p{
-	font-weight: 400;
-	font-size: 16px;
-}
+
+	h2{
+			font-weight:500;
+			font-size:20px;
+			margin: 0 0 15px 0;
+	}
+	.meta{
+		margin-right: 65px;
+		flex:0 0 110px;
+
+		p{
+			font-weight: 400;
+			font-size: 16px;
+		}
+		p.time{
+			line-height:1.5;
+			font-weight:400;
+		}
+		p.category{
+			color:#707070;
+			margin:20px 0 0 0;
+			font-weight:300;
+		}
+	}
+	
+}//end of:report;
+
+/* report */
 
 
-.report .meta{
-	margin-right: 65px;
-	flex:0 0 110px;
-}
-.report .meta .time{
-	line-height:1.5;
-	font-weight:400;
-}
-.report .meta .category{
-	color:#707070;
-	margin:20px 0 0 0;
-	font-weight:300;
-}
+
 .report .content .holder{
 	margin: 0 0 15px 0;
 }
