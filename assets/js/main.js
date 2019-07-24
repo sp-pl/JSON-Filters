@@ -143,5 +143,3 @@ import appendReport from './appendReport.js';
         document.querySelector('button.search').addEventListener('click',(evt) => {performSearch(searchObj,data,evt)});
     };
 }());
-
-

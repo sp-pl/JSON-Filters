@@ -58,12 +58,12 @@ function createLayout(data){
         reportAction.classList.add('action');
 
     if(data.files.length === 0){
-        console.log(0)
+        console.log(0);
     }else if(data.files.length === 1){
-        console.log(1)
+        console.log(1);
     }else{
         for(let i = 0; i<data.files.length; i++){
-            console.log(i)
+            console.log(i);
         }
     }    
 
