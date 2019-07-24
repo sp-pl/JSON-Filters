@@ -145,7 +145,7 @@ import appendReport from './appendReport.js';
         function textFilter(evt){
             let allVisibleReports = document.querySelectorAll('.report');
             for(let i = 0; i < allVisibleReports.length; i++){
-                if(!allVisibleReports[i].innerText.includes(evt.target.value)){
+                if(!allVisibleReports[i].innerText.toLowerCase().includes(evt.target.value.toLowerCase())){
                     allVisibleReports[i].style.display = 'none';
                 }else{
                     allVisibleReports[i].style.display = 'flex';
