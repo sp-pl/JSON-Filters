@@ -72,11 +72,11 @@
 .report .action .accordion-container{
 	width:100%;
 }
-.report .action .accordion + div{
+.report .accordion + div{
 	display:none;
 }
 
-.report .action .accordion.active+div{
+.report .accordion.active+div{
 	display:flex;
 	flex-direction:column;
 	border-top:var(--silver-border);

@@ -27,14 +27,7 @@ function createLayout(data){
         innerMetaP2.innerHTML = 'Raporty ' + data.category.toLowerCase()
         
         metaBox.appendChild(innerMetaP2);
-
-//<div class="holder">
-//    <h2 class="title">' + re[i].title + '</h2>
-//    <p class="description">' + re[i].description + '</p>
-//</div>
-//<div class="action">
-//    <a class="open" href="#">Zobacz raport</a>
-
+        
     let reportContent = document.createElement('DIV');
         reportContent.classList.add('content');        
 
@@ -57,14 +50,50 @@ function createLayout(data){
     let reportAction = document.createElement('DIV');
         reportAction.classList.add('action');
 
+// single_item.classList.add('no-file');
+// single_item.innerHTML = metaContainer + 
+//'<div class="content">' + reportDetails + '</div>';
+// outputContainer.appendChild(single_item)
+
+//single_item.classList.add('single-file')
+//reportFiles = '<a class="download" href="#">' + resp[0].files[0].filename + '.pdf (' + resp[0].files[0].filesize + 'kB)</a></div>';
+//single_item.innerHTML = metaContainer + '<div class="content">' + reportDetails + reportFiles + '</div>';
+//outputContainer.appendChild(single_item)
+
     if(data.files.length === 0){
         console.log(0);
     }else if(data.files.length === 1){
         console.log(1);
     }else{
+        let multiFileContainer = document.createElement('DIV');
+            multiFileContainer.classList.add('accordion-container');
+
+        let accordionLink = document.createElement('A');
+            accordionLink.classList.add('accordion');
+            accordionLink.innerHTML = 'pliki do pobrania (' + data.files.length + ')</a>';
+            accordionLink.addEventListener('click',function(){
+                if(!this.classList.contains('active')){
+                    this.classList.add('active');
+                }else{
+                    this.classList.remove('active');
+                }
+            })
+
+            multiFileContainer.appendChild(accordionLink);
+
+        let multiFileHolder = document.createElement('DIV');
+            multiFileContainer.appendChild(multiFileHolder);
+            
+
         for(let i = 0; i<data.files.length; i++){
-            console.log(i);
+            let singleFileLink = document.createElement('A');
+                singleFileLink.setAttribute('href','#');
+                singleFileLink.innerHTML = data.files[i].filename + '.pdf' + 
+                '(' + data.files[i].filesize + '.Kb)</a>';
+                multiFileHolder.appendChild(singleFileLink);
         }
+            multiFileContainer.appendChild(multiFileHolder);
+            reportContent.appendChild(multiFileContainer);
     }    
 
 
