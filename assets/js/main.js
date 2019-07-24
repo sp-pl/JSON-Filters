@@ -141,5 +141,17 @@ import appendReport from './appendReport.js';
         };
         performSearch(searchObj,data);
         document.querySelector('button.search').addEventListener('click',(evt) => {performSearch(searchObj,data,evt)});
+
+        function textFilter(evt){
+            let allVisibleReports = document.querySelectorAll('.report');
+            for(let i = 0; i < allVisibleReports.length; i++){
+                if(!allVisibleReports[i].innerText.includes(evt.target.value)){
+                    allVisibleReports[i].style.display = 'none';
+                }else{
+                    allVisibleReports[i].style.display = 'flex';
+                }
+            }
+        };
+        document.querySelector('.filter .search .input-container input').addEventListener('input',(evt) => {textFilter(evt)})        
     };
 }());
