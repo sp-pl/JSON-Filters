@@ -7,33 +7,21 @@
 //to start go to project directory and hit npm start
 
 
-at this moment what is working: 
+features: 
 
 -select are created from the years assigned to data prop in each records
 
 -tabs are created from the categories from category prop
 
 -to perform search select year from select and press any tab button you like
--press 'Wyszukaj' to search
+press 'Wyszukaj' to search
+
+to perform search by text content, type any text you like in text input, its search by
+all data, title, paragraph if exists, date and attached files.
 
 
-to do:
-
--display layout relayed on files items per record
-
--show reports contained text in text input
+-display layout relayed on files items per record (0,1 or more attachments with accordion)
 
 
-
-
-
-
-
-OLD VERSION:
-this code is fetching JSON with special structure of data and create: 
-1) select with years from JSON records,
-2) create tabs with categories from JSON field "category"
-3) allow you to filter raports by clicking on the category tab and select year,
-4) it also allow you to filter results by title and content of record by typing text into input
 
 
