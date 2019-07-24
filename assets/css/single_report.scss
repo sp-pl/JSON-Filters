@@ -50,45 +50,35 @@
 				color:#69c3d5;
 				font-weight:600;
 			}
-			.accordion{
-
-				.accordion:after{
-					content:'\e802';
-					font-family:fontello;
-					margin-left:5px;
-					&.active:after{
-						content:'\e803';
-					}
-				}
-			}	
 		}//end of: action;
-		}//end of: content;
-	}//end of:report;
+	}//end of: content;
+}//end of:report;
 }
 
 
+.report .accordion{
+	&:after{
+		content:'\e802';
+		font-family:fontello;
+		margin-left:5px;
+	}
+	&.active:after{
+		content:'\e803';
+	}
+	&.active + div{
+		display:flex;
+		flex-direction:column;
+		border-top:var(--silver-border);
+		margin-top:10px;
+		a{
+			margin-top:15px;
+		}
+	}
+	+ div{
+		display:none;
+	}
+}
 
-//Im leaving this because sibling selector with SASS doesnt work!!!!
-//I tried this:
-// .accordion{
-// 	 +div{
-//
-//	 }
-// }
 .report .action .accordion-container{
 	width:100%;
 }
-.report .accordion + div{
-	display:none;
-}
-
-.report .accordion.active+div{
-	display:flex;
-	flex-direction:column;
-	border-top:var(--silver-border);
-	margin-top:10px;
-}
-.report .action .accordion.active+div a{
-	margin-top:15px;
-}
-/* end of:report */
