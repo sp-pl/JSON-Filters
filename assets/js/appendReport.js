@@ -47,15 +47,6 @@ function createLayout(data){
         reportContent.appendChild(reportDetails);
         singleReport.appendChild(reportContent);
 
-// single_item.classList.add('no-file');
-// single_item.innerHTML = metaContainer + 
-//'<div class="content">' + reportDetails + '</div>';
-// outputContainer.appendChild(single_item)
-
-//single_item.classList.add('single-file')
-//reportFiles = '<a class="download" href="#">' + resp[0].files[0].filename + '.pdf (' + resp[0].files[0].filesize + 'kB)</a></div>';
-//single_item.innerHTML = metaContainer + '<div class="content">' + reportDetails + reportFiles + '</div>';
-//outputContainer.appendChild(single_item)
     let reportAction = document.createElement('DIV');
         reportAction.classList.add('action');
 
@@ -67,7 +58,12 @@ function createLayout(data){
     if(data.files.length === 0){
         reportContent.appendChild(reportAction);
     }else if(data.files.length === 1){
-        console.log(1);
+            reportContent.appendChild(reportAction);
+        let singleFileLink = document.createElement('A');
+            singleFileLink.setAttribute('href','#');
+            singleFileLink.classList.add('download');
+            singleFileLink.innerHTML = data.files[0].filename + '.pdf (' + data.files[0].filesize + ')kB';
+            reportAction.appendChild(singleFileLink);
     }else{
         let multiFileContainer = document.createElement('DIV');
             multiFileContainer.classList.add('accordion-container');
@@ -93,7 +89,7 @@ function createLayout(data){
             let singleFileLink = document.createElement('A');
                 singleFileLink.setAttribute('href','#');
                 singleFileLink.innerHTML = data.files[i].filename + '.pdf' + 
-                '(' + data.files[i].filesize + '.Kb)</a>';
+                '(' + data.files[i].filesize + '.kB)</a>';
                 multiFileHolder.appendChild(singleFileLink);
         }
             multiFileContainer.appendChild(multiFileHolder);
