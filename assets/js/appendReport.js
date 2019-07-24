@@ -27,7 +27,7 @@ function createLayout(data){
         innerMetaP2.innerHTML = 'Raporty ' + data.category.toLowerCase()
         
         metaBox.appendChild(innerMetaP2);
-        
+
     let reportContent = document.createElement('DIV');
         reportContent.classList.add('content');        
 
@@ -47,9 +47,6 @@ function createLayout(data){
         reportContent.appendChild(reportDetails);
         singleReport.appendChild(reportContent);
 
-    let reportAction = document.createElement('DIV');
-        reportAction.classList.add('action');
-
 // single_item.classList.add('no-file');
 // single_item.innerHTML = metaContainer + 
 //'<div class="content">' + reportDetails + '</div>';
@@ -59,9 +56,16 @@ function createLayout(data){
 //reportFiles = '<a class="download" href="#">' + resp[0].files[0].filename + '.pdf (' + resp[0].files[0].filesize + 'kB)</a></div>';
 //single_item.innerHTML = metaContainer + '<div class="content">' + reportDetails + reportFiles + '</div>';
 //outputContainer.appendChild(single_item)
+    let reportAction = document.createElement('DIV');
+        reportAction.classList.add('action');
+
+    let seeReportLink = document.createElement('A');
+        seeReportLink.innerHTML = "Zobacz raport";
+
+        reportAction.appendChild(seeReportLink); 
 
     if(data.files.length === 0){
-        console.log(0);
+        reportContent.appendChild(reportAction);
     }else if(data.files.length === 1){
         console.log(1);
     }else{
