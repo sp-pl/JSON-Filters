@@ -45,6 +45,7 @@ function createLayout(data){
         reportDescription.innerHTML = data.description;
 
         reportContent.appendChild(reportDetails);
+        reportContent.appendChild(reportDescription);
         singleReport.appendChild(reportContent);
 
     let reportAction = document.createElement('DIV');
