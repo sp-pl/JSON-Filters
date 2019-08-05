@@ -27,9 +27,9 @@ fetchData('http://localhost:3000/assets/data/data.json')
 
 let initApp = (data) => {
     formatData(data);
-    appendYearOptions(getUniqueValues(data,'date.fullYear'))
-    appendCategoriesTabs(getUniqueValues(data,'category'))
-    controls(searchObjInit(getUniqueValues(data,'category')), data)
+    appendTags(getUniqueValues(data,'date.fullYear'),'OPTION',selectOptionsContainer)
+    appendTags(getUniqueValues(data,'category'),'BUTTON',categoriesTabsContainer)
+    // controls(searchObjInit(getUniqueValues(data,'category')), data)
 }
 
 let formatData = (data) => {
@@ -59,14 +59,20 @@ let getUniqueValues = (data,propName) => {
     })
     return values.filter((v,index,self) => self.indexOf(v) === index)
 }
-
-let appendYearOptions = uniqueYears => {
-    uniqueYears.forEach( current => {
-        let newOption = document.createElement('OPTION')
-        newOption.textContent = current
-        selectOptionsContainer.appendChild(newOption)
+let appendTags = (value,tagName,destination) => {
+    value.forEach( current => {
+        let newTag = document.createElement(tagName)
+        newTag.textContent = current
+        destination.appendChild(newTag)
     })
 }
+// let appendYearOptions = uniqueYears => {
+//     uniqueYears.forEach( current => {
+//         let newOption = document.createElement('OPTION')
+//         newOption.textContent = current
+//         selectOptionsContainer.appendChild(newOption)
+//     })
+// }
 
 let appendCategoriesTabs = uniqueCats => {
     uniqueCats.forEach( current => {
