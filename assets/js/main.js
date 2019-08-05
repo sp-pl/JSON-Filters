@@ -26,11 +26,12 @@ fetchData('http://localhost:3000/assets/data/data.json');
 
 let initApp = (data) => {
     formatData(data);
-    createYearOptions(data,'date');
+    getUniqueYears(data,'date');
+    createYearOptions(getUniqueYears(data,'date'))
     let uniqueCategories = createCategoriesTabs(data,'category');
-    let searchObjectFirst = searchObjInit(uniqueCategories);
-    controls(searchObjectFirst, data);
-};
+    let searchObjectFirst = searchObjInit(uniqueCategories)
+    controls(searchObjectFirst, data)
+}
 
 let formatData = (data) => {
     return data.sort((a,b) => {
@@ -38,29 +39,29 @@ let formatData = (data) => {
     }).map( (item) => {
         return item.date = new Date(item.date)
     })
-};
+}
 
-let createYearOptions = (data,propName) => {
-    let allYears = [];
-    for(let i = 0; i < data.length; i++){
-        allYears.push(data[i][propName].getFullYear());
-    };
+let getUniqueYears = (data,propName) => {
+    let allYears = data.map(current => {
+        return current[propName].getFullYear()
+    })
+    return allYears.filter((v,index,self) => self.indexOf(v) === index)
+}
 
-
-    
-    let singleYears = allYears.filter((v,index,self) => self.indexOf(v) === index);
-    for(let i = 0; i < singleYears.length; i++){
-        let newOption = document.createElement('OPTION');
-        newOption.textContent = singleYears[i];
-        selectOptionsContainer.appendChild(newOption);
-    }
-};
+let createYearOptions = (uniqueYears) => {
+    uniqueYears.forEach( current => {
+        let newOption = document.createElement('OPTION')
+        newOption.textContent = current
+        selectOptionsContainer.appendChild(newOption)
+    })
+}
 
 let createCategoriesTabs = (data,propName) => {
     let categories = [];
     for(let i = 0; i < data.length; i++){
         categories.push(data[i][propName])
     }
+    // let categories = data.map
 
     let singleCategories = categories.filter((v,index,self) => self.indexOf(v) === index );
     for(let i = 0; i < singleCategories.length; i++){
@@ -80,14 +81,10 @@ let searchObjInit = (categories) => {
     searchObj.year = selectOptionsContainer.value;
     searchObj.all = true;
     if(categories){
-        // for(let i = 0; i<categories.length; i++){
-        //     searchObj[categories[i]] = false;
-        // };
         categories.map((current,index) => {
             return searchObj[current[index]]
         })
-    };
-    console.log(searchObj)
+    }
     return searchObj;
 };
 
