@@ -26,8 +26,8 @@ fetchData('http://localhost:3000/assets/data/data.json');
 
 let initApp = (data) => {
     formatData(data);
-    getUniqueYears(data,'date');
-    createYearOptions(getUniqueYears(data,'date'))
+    appendYearOptions(getUniqueYears(data,'date'))
+    appendCategoriesTabs(getUniqueCategories(data,'category'))
     let uniqueCategories = createCategoriesTabs(data,'category');
     let searchObjectFirst = searchObjInit(uniqueCategories)
     controls(searchObjectFirst, data)
@@ -47,8 +47,15 @@ let getUniqueYears = (data,propName) => {
     })
     return allYears.filter((v,index,self) => self.indexOf(v) === index)
 }
+let getUniqueCategories = (data,propName) => {
+    let allCats = data.map(current => {
+        return current[propName]
+    })
+    return allCats.filter((v,index,self) => self.indexOf(v) === index)
 
-let createYearOptions = (uniqueYears) => {
+}
+
+let appendYearOptions = uniqueYears => {
     uniqueYears.forEach( current => {
         let newOption = document.createElement('OPTION')
         newOption.textContent = current
@@ -56,22 +63,31 @@ let createYearOptions = (uniqueYears) => {
     })
 }
 
-let createCategoriesTabs = (data,propName) => {
-    let categories = [];
-    for(let i = 0; i < data.length; i++){
-        categories.push(data[i][propName])
-    }
-    // let categories = data.map
+let appendCategoriesTabs = uniqueCats => {
+    uniqueCats.forEach( current => {
+        let newTab = document.createElement('BUTTON')
+        newTab.textContent = current
+        newTab.dataset.category = current
+        categoriesTabsContainer.appendChild(newTab)
+    })
+}
 
-    let singleCategories = categories.filter((v,index,self) => self.indexOf(v) === index );
-    for(let i = 0; i < singleCategories.length; i++){
-        let newButton = document.createElement('BUTTON');
-        newButton.textContent = singleCategories[i];
-        newButton.dataset.category = singleCategories[i];
-        categoriesTabsContainer.appendChild(newButton);
-    };
-    return singleCategories;
-};
+// let createCategoriesTabs = (data,propName) => {
+//     let categories = [];
+//     for(let i = 0; i < data.length; i++){
+//         categories.push(data[i][propName])
+//     }
+//     // let categories = data.map
+
+//     let singleCategories = categories.filter((v,index,self) => self.indexOf(v) === index );
+//     for(let i = 0; i < singleCategories.length; i++){
+//         let newButton = document.createElement('BUTTON');
+//         newButton.textContent = singleCategories[i];
+//         newButton.dataset.category = singleCategories[i];
+//         categoriesTabsContainer.appendChild(newButton);
+//     };
+//     return singleCategories;
+// };
 
 let searchObjInit = (categories) => {
     let searchObj = {
