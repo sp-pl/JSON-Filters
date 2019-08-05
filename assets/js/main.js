@@ -1,8 +1,8 @@
 import appendReport from './appendReport.js';
 
-let selectOptionsContainer = document.querySelector('.filter .search .select-year-container .years');
-let categoriesTabsContainer = document.querySelector('.filter .search .categories');
-let mainOutput = document.querySelector('.output'); 
+const selectOptionsContainer = document.querySelector('.filter .search .select-year-container .years');
+const categoriesTabsContainer = document.querySelector('.filter .search .categories');
+const mainOutput = document.querySelector('.output'); 
 
 let fetchData = (link) => {
     fetch(link, {
