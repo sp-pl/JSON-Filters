@@ -5,7 +5,7 @@ const categoriesTabsContainer = document.querySelector('.filter .search .categor
 const mainOutput = document.querySelector('.output'); 
 
 let fetchData = (link) => {
-    fetch(link, {
+    return fetch(link, {
         method:'GET',
         headers: {
             Accept: 'application/json'
@@ -18,41 +18,46 @@ let fetchData = (link) => {
             throw new Error('server not')
         }
     })
-    .then(json => {
+}
+
+fetchData('http://localhost:3000/assets/data/data.json')
+    .then( json => {
         initApp(json)
     })
-};
-fetchData('http://localhost:3000/assets/data/data.json');
 
 let initApp = (data) => {
     formatData(data);
-    appendYearOptions(getUniqueYears(data,'date'))
-    appendCategoriesTabs(getUniqueCategories(data,'category'))
-    let uniqueCategories = createCategoriesTabs(data,'category');
-    let searchObjectFirst = searchObjInit(uniqueCategories)
-    controls(searchObjectFirst, data)
+    appendYearOptions(getUniqueValues(data,'date.fullYear'))
+    appendCategoriesTabs(getUniqueValues(data,'category'))
+    controls(searchObjInit(getUniqueValues(data,'category')), data)
 }
 
 let formatData = (data) => {
     return data.sort((a,b) => {
         return a.date - b.date
     }).map( (item) => {
-        return item.date = new Date(item.date)
+        let itemDate = new Date(item.date)
+        return item.date = {
+            fullYear: itemDate.getFullYear(),
+            month: itemDate.getMonth(),
+            day: itemDate.getDay(),
+            hours: itemDate.getHours(),
+            minutes:itemDate.getMinutes()
+        }
     })
+
 }
 
-let getUniqueYears = (data,propName) => {
-    let allYears = data.map(current => {
-        return current[propName].getFullYear()
+let getUniqueValues = (data,propName) => {
+    function getValue(st, obj) {
+        return st.replace(/\[([^\]]+)]/g, '.$1').split('.').reduce(function(o, p) { 
+            return o[p];
+        }, obj);
+    }
+    let values = data.map((current,index) => {
+        return (getValue(propName,current))
     })
-    return allYears.filter((v,index,self) => self.indexOf(v) === index)
-}
-let getUniqueCategories = (data,propName) => {
-    let allCats = data.map(current => {
-        return current[propName]
-    })
-    return allCats.filter((v,index,self) => self.indexOf(v) === index)
-
+    return values.filter((v,index,self) => self.indexOf(v) === index)
 }
 
 let appendYearOptions = uniqueYears => {
@@ -72,37 +77,20 @@ let appendCategoriesTabs = uniqueCats => {
     })
 }
 
-// let createCategoriesTabs = (data,propName) => {
-//     let categories = [];
-//     for(let i = 0; i < data.length; i++){
-//         categories.push(data[i][propName])
-//     }
-//     // let categories = data.map
-
-//     let singleCategories = categories.filter((v,index,self) => self.indexOf(v) === index );
-//     for(let i = 0; i < singleCategories.length; i++){
-//         let newButton = document.createElement('BUTTON');
-//         newButton.textContent = singleCategories[i];
-//         newButton.dataset.category = singleCategories[i];
-//         categoriesTabsContainer.appendChild(newButton);
-//     };
-//     return singleCategories;
-// };
-
 let searchObjInit = (categories) => {
     let searchObj = {
         year: '',
         all: '' 
     };
-    searchObj.year = selectOptionsContainer.value;
-    searchObj.all = true;
+    searchObj.year = selectOptionsContainer.value
+    searchObj.all = true
     if(categories){
-        categories.map((current,index) => {
-            return searchObj[current[index]]
+        categories.forEach((current,index) => {
+            searchObj[current] = false
         })
     }
     return searchObj;
-};
+}
 
 let controls = (searchObj,data) => {
 
@@ -113,7 +101,7 @@ let controls = (searchObj,data) => {
 
     function categoryTabsBool(evt){
         evt.preventDefault();
-        let categoriesAllTabs = document.querySelectorAll('.filter .search .categories button');
+        const categoriesAllTabs = document.querySelectorAll('.filter .search .categories button');
         if(evt.target.dataset.category === 'all' && !evt.target.classList.contains('active')){
             evt.target.classList.add('active');
             searchObj.all = true;
@@ -122,6 +110,10 @@ let controls = (searchObj,data) => {
                 searchObj[categoriesAllTabs[i].dataset.category] = false;
             };
         }
+        // const isActive=evt.target.matches( 'button.active:not([data-category=all])' );
+        // categoriesAllTabs[0].classList.toggle( 'active', isActive );
+        // evt.target.classList.toggle( 'active', isActive );
+        // searchObj[ evt.target.dataset.category ] =isActive;
         if((evt.target.dataset.category !== 'all' && !evt.target.classList.contains('active')) && evt.target.tagName === 'BUTTON'){
             categoriesAllTabs[0].classList.remove('active');
             searchObj.all = false;
@@ -140,19 +132,33 @@ let controls = (searchObj,data) => {
             evt.preventDefault();
         }
         mainOutput.innerHTML = "";
-        for(let i = 0; i<data.length; i++){
-            if(data[i].date.getFullYear() == searchObj.year){
+        data.forEach((current,index) => {
+            // console.log(current.date.getFullYear() == searchObj.year)
+            if(data.date.getFullYear() == searchObj.year){
                 if(searchObj.all === true){
                     appendReport(data[i]);
                 }else{
                     for(let props in searchObj){
                         if((searchObj[props] == true) && data[i].category == props){
-                            appendReport(data[i])
+                            appendReport(data)
                         };
                     }; 
                 };
             };
-        };
+        })
+        // for(let i = 0; i<data.length; i++){
+        //     if(data[i].date.getFullYear() == searchObj.year){
+        //         if(searchObj.all === true){
+        //             appendReport(data[i]);
+        //         }else{
+        //             for(let props in searchObj){
+        //                 if((searchObj[props] == true) && data[i].category == props){
+        //                     appendReport(data[i])
+        //                 };
+        //             }; 
+        //         };
+        //     };
+        // };
     };
     performSearch(searchObj,data);
     document.querySelector('button.search').addEventListener('click',(evt) => {performSearch(searchObj,data,evt)});
