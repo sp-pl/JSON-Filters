@@ -71,11 +71,7 @@ function createLayout(data){
             accordionLink.classList.add('accordion');
             accordionLink.innerHTML = 'pliki do pobrania (' + data.files.length + ')</a>';
             accordionLink.addEventListener('click',function(){
-                if(!this.classList.contains('active')){
-                    this.classList.add('active');
-                }else{
-                    this.classList.remove('active');
-                }
+                this.classList.toggle('active')
             })
 
             multiFileContainer.appendChild(accordionLink);
