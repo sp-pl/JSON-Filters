@@ -45,6 +45,8 @@ let createYearOptions = (data,propName) => {
     for(let i = 0; i < data.length; i++){
         allYears.push(data[i][propName].getFullYear());
     };
+
+
     
     let singleYears = allYears.filter((v,index,self) => self.indexOf(v) === index);
     for(let i = 0; i < singleYears.length; i++){
@@ -78,10 +80,14 @@ let searchObjInit = (categories) => {
     searchObj.year = selectOptionsContainer.value;
     searchObj.all = true;
     if(categories){
-        for(let i = 0; i<categories.length; i++){
-            searchObj[categories[i]] = false;
-        };
+        // for(let i = 0; i<categories.length; i++){
+        //     searchObj[categories[i]] = false;
+        // };
+        categories.map((current,index) => {
+            return searchObj[current[index]]
+        })
     };
+    console.log(searchObj)
     return searchObj;
 };
 
@@ -112,6 +118,7 @@ let controls = (searchObj,data) => {
             evt.target.classList.remove('active');
             searchObj[evt.target.dataset.category] = false;
         };
+        console.log(searchObj)
     };
     categoriesTabsContainer.addEventListener('click',categoryTabsBool);
     
