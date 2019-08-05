@@ -33,13 +33,11 @@ let initApp = (data) => {
 };
 
 let formatData = (data) => {
-    data.sort((a,b) => {
+    return data.sort((a,b) => {
         return a.date - b.date
-    });
-    for(let i = 0; i < data.length; i++){
-         data[i].date = new Date(data[i].date)
-    };
-    return data;
+    }).map( (item) => {
+        return item.date = new Date(item.date)
+    })
 };
 
 let createYearOptions = (data,propName) => {
