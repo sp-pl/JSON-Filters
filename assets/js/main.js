@@ -1,4 +1,5 @@
 import appendReport from './appendReport.js';
+import getValueForNestedBracket from './helpers.js'
 
 const selectOptionsContainer = document.querySelector('.filter .search .select-year-container .years');
 const categoriesTabsContainer = document.querySelector('.filter .search .categories');
@@ -29,7 +30,7 @@ let initApp = (data) => {
     formatData(data);
     appendTags(getUniqueValues(data,'date.fullYear'),'OPTION',selectOptionsContainer)
     appendTags(getUniqueValues(data,'category'),'BUTTON',categoriesTabsContainer)
-    // controls(searchObjInit(getUniqueValues(data,'category')), data)
+    controls(searchObjInit(getUniqueValues(data,'category')), data)
 }
 
 let formatData = (data) => {
@@ -45,41 +46,21 @@ let formatData = (data) => {
             minutes:itemDate.getMinutes()
         }
     })
-
 }
 
 let getUniqueValues = (data,propName) => {
-    function getValue(st, obj) {
-        return st.replace(/\[([^\]]+)]/g, '.$1').split('.').reduce(function(o, p) { 
-            return o[p];
-        }, obj);
-    }
     let values = data.map((current,index) => {
-        return (getValue(propName,current))
+        return (getValueForNestedBracket(propName,current))
     })
     return values.filter((v,index,self) => self.indexOf(v) === index)
 }
+
 let appendTags = (value,tagName,destination) => {
     value.forEach( current => {
         let newTag = document.createElement(tagName)
         newTag.textContent = current
+        newTag.dataset.category = current
         destination.appendChild(newTag)
-    })
-}
-// let appendYearOptions = uniqueYears => {
-//     uniqueYears.forEach( current => {
-//         let newOption = document.createElement('OPTION')
-//         newOption.textContent = current
-//         selectOptionsContainer.appendChild(newOption)
-//     })
-// }
-
-let appendCategoriesTabs = uniqueCats => {
-    uniqueCats.forEach( current => {
-        let newTab = document.createElement('BUTTON')
-        newTab.textContent = current
-        newTab.dataset.category = current
-        categoriesTabsContainer.appendChild(newTab)
     })
 }
 
@@ -133,24 +114,24 @@ let controls = (searchObj,data) => {
     };
     categoriesTabsContainer.addEventListener('click',categoryTabsBool);
     
-    function performSearch(searchObj,data,evt){
+    function performSearch(searchObj,data,propName,evt){
         if(evt){
             evt.preventDefault();
         }
         mainOutput.innerHTML = "";
+
         data.forEach((current,index) => {
-            // console.log(current.date.getFullYear() == searchObj.year)
-            if(data.date.getFullYear() == searchObj.year){
+            if(getValueForNestedBracket(propName,current) == searchObj.year){
                 if(searchObj.all === true){
-                    appendReport(data[i]);
+                    appendReport(current);
                 }else{
                     for(let props in searchObj){
                         if((searchObj[props] == true) && data[i].category == props){
-                            appendReport(data)
+                            appendReport(data[i])
                         };
                     }; 
                 };
-            };
+            }
         })
         // for(let i = 0; i<data.length; i++){
         //     if(data[i].date.getFullYear() == searchObj.year){
@@ -166,7 +147,7 @@ let controls = (searchObj,data) => {
         //     };
         // };
     };
-    performSearch(searchObj,data);
+    performSearch(searchObj,data,'date.fullYear');
     document.querySelector('button.search').addEventListener('click',(evt) => {performSearch(searchObj,data,evt)});
 
     function textFilter(evt){
